@@ -3,6 +3,7 @@ import requests
 import os
 import pandas as pd
 from utils.translations import t
+from components.api_client import API_URL
 
 st.set_page_config(page_title="Makkal Connect", layout="wide")
 
@@ -134,7 +135,7 @@ def show_login_councillor():
         party = st.text_input("Party Name")
         if st.button("Verify Credentials"):
             if name and ward and party:
-                res = requests.post("http://api:8000/api/v1/auth/login", data={"username": "councillor@tvk.com", "password": "councillor123"})
+                res = requests.post(f"{API_URL}/auth/login", data={"username": "councillor@tvk.com", "password": "councillor123"})
                 if res.status_code == 200:
                     st.session_state["access_token"] = res.json()["access_token"]
                     st.session_state["user_role"] = "councillor"
@@ -158,7 +159,7 @@ def show_login_admin():
         email = st.text_input(t("Email"))
         password = st.text_input(t("Password"), type="password")
         if st.button(t("Login")):
-            res = requests.post("http://api:8000/api/v1/auth/login", data={"username": email, "password": password})
+            res = requests.post(f"{API_URL}/auth/login", data={"username": email, "password": password})
             if res.status_code == 200:
                 st.session_state["access_token"] = res.json()["access_token"]
                 st.session_state["user_role"] = "admin"
