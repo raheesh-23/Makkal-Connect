@@ -1,0 +1,8 @@
+streamlit
+requests
+plotly
+streamlit-folium
+folium
+pandas
+python-jose
+qrcode[pil]
