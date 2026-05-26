@@ -1,7 +1,8 @@
+import os
 import requests
 import streamlit as st
 
-API_URL = "http://api:8000/api/v1"
+API_URL = os.environ.get("API_URL", "http://api:8000").rstrip("/") + "/api/v1"
 
 def get_headers():
     headers = {"Content-Type": "application/json"}
